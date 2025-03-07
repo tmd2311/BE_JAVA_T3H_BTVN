@@ -12,7 +12,6 @@ public class Bai3 {
         int tongSoLe= 0;
         int trungBinh=0;
         int demSoNguyenTo=0;
-//        StringBuilder daySoNguyenTo = new StringBuilder();
         for (int i = 0; i < n; i++) {
             System.out.print("Nhập vào phần tử thứ "+ (i+1)+": ");
             a[i]=sc.nextInt();
@@ -42,7 +41,6 @@ public class Bai3 {
         inMang(soNguyenTo(a));
 
 
-
         System.out.println("\n4)");
         inMangChanLeDaSapXep(demChan,demLe,a);
 
@@ -58,17 +56,39 @@ public class Bai3 {
         System.out.println("Nhap gia tri can them: ");
         int giaTri = sc.nextInt();
 
+
         int[] b= themPhanTuMoi(a,viTri,giaTri);
         System.out.println("Mảng sau khi them: ");
         inMang(b);
 
-
-
-
-
+        System.out.println("\nNhap so can xoa: ");
+        int soXoa = sc.nextInt();
+        System.out.println("\nMang sau khi xoa: ");
+        in(b, soXoa);
 
     }
 
+    public static int timKiem(int[] a, int giaTri){
+        for (int i =0; i<a.length; i++){
+            if(a[i] == giaTri) return i;
+        }
+        return -1;
+    }
+    public static int[] xoaPhanTu(int[] a, int viTri){
+        for( int i = viTri; i< a.length -1; i++){
+             a[i] = a[i+1];
+        }
+        a[a.length-1] = -1;
+        return a;
+    }
+    public static void in(int[] a, int giaTri){
+        int viTri;
+        while ((viTri = timKiem(a, giaTri)) != -1){
+            a= xoaPhanTu(a, viTri);
+        }
+        inMang(a);
+
+    }
     public static boolean kiemTra(int x){
         if(x<2) return false;
         for(int i=2; i<=Math.sqrt(x); i++){
@@ -76,7 +96,6 @@ public class Bai3 {
         }
         return true;
     }
-
     public static int[] soNguyenTo(int[] a) {
 
         Set<Integer> setNguyenTo = new HashSet<>();
@@ -91,9 +110,6 @@ public class Bai3 {
             mangSoNguyenTo[viTri]=x;
             viTri++;
         }
-
-
-
         return mangSoNguyenTo;
     }
 
@@ -111,7 +127,6 @@ public class Bai3 {
         }
         return mangMoi;
     }
-
     public static void inMangChanLeDaSapXep(int demChan, int demLe, int[] a){
         int[] chan= new int[demChan];
         int[] le= new int[demLe];
@@ -167,6 +182,7 @@ public class Bai3 {
     }
     public static void inMang(int[] a){
         for (int x : a){
+            if(x<0) continue;
             System.out.print(x+" ");
         }
     }
@@ -195,19 +211,12 @@ public class Bai3 {
         int[] mangMoi = new int[a.length +1];
 
         for (int i= 0, j = 0; i< mangMoi.length; i++) {
-            if(i == viTri) mangMoi[j] = giaTri;
+            if(i == viTri) mangMoi[i] = giaTri;
             else{
-                mangMoi[j] = a[i];
+                mangMoi[i] = a[j];
                 j++;
             }
         }
         return mangMoi;
     }
-
-
-
-
-
-
-
 }

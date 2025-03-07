@@ -33,12 +33,11 @@ public class Bai1 {
         Pattern pattern = Pattern.compile("[\\p{L}]+"); // lớp mẫu có chữ cái có dấu
         Matcher matcher = pattern.matcher(chuoi); // tìm kiếm
 
-        int soTu=0;
+        int soTu;
         while (matcher.find()) {
             String tu = matcher.group();
             soTu = map.get(tu) != null ? map.get(tu) : 0;
             map.put(tu, soTu+1);
-            soTu = 0;
         }
         return map;
     }
@@ -54,6 +53,6 @@ public class Bai1 {
         return builder.toString().trim();
     }
     public static String xoaNguyenAm(String chuoi){
-        return chuoi.replace("[aeiouAEIOUáàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]", "");
+        return chuoi.replaceAll("[aeiouAEIOUáàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]", "");
     }
 }
