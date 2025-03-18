@@ -6,12 +6,25 @@ import Bai1.Animals.Bird;
 import java.util.ArrayList;
 
 public class Zoo {
-    protected ArrayList<Animal> zoos;
+    protected Animal[] zoos;
     public Zoo() {
-        this.zoos = new ArrayList<>();
+        this.zoos = new Animal[2];
     }
     public void addAnimal(Animal animal) {
-        this.zoos.add(animal);
+        if(zoos[zoos.length-1] != null){
+            Animal [] newZoos = new Animal[zoos.length*2];
+            for(int i=0; i<zoos.length; i++){
+                newZoos[i] = zoos[i];
+            }
+            newZoos[zoos.length] = animal;
+            this.zoos = newZoos;
+            return;
+        }
+        for(int i=0; i<zoos.length; i++){
+            if(zoos[i] == null){
+                zoos[i] = animal;
+            }
+        }
     }
     public void makeAllSound() {
         for (Animal animal : zoos) {

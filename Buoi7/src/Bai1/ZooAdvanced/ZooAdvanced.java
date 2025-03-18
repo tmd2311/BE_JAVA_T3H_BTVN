@@ -6,6 +6,7 @@ import Bai1.Animals.Bird;
 import Bai1.Animals.Cat;
 import Bai1.Animals.Dog;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -27,9 +28,9 @@ public class ZooAdvanced extends Zoo {
 
     private void sortAnimalsByAge() {
         Animal temp = null;
-        for (int i = 0; i < zoos.size()-1; i++) {
-            for (int j = 0; j < zoos.size()-i-1; j++) {
-                if(zoos.get(j).getAge() > zoos.get(j+1).getAge()) {
+        for (int i = 0; i < zoos.length-1; i++) {
+            for (int j = 0; j < zoos.length-i-1; j++) {
+                if(zoos[j].getAge() > zoos[j+1].getAge()) {
                     swap(j);
                 }
             }
@@ -40,9 +41,9 @@ public class ZooAdvanced extends Zoo {
 
     private void swap(int j) {
         Animal temp;
-        temp = zoos.get(j);
-        zoos.set(j, zoos.get(j +1));
-        zoos.set(j+1, temp);
+        temp = zoos[j];
+        zoos[j] = zoos[j +1];
+        zoos[j+1]= temp;
     }
 
 
@@ -54,9 +55,9 @@ public class ZooAdvanced extends Zoo {
         animal = xuLyLuaChon(luaChon);
         if (animal == null) return;
         animal.inputInfo(animalMap.get(luaChon));
-        zoos.add(animal);
-    }
+        super.addAnimal(animal);
 
+    }
 
 
     private static Animal xuLyLuaChon(int luaChon) {
