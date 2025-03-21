@@ -1,58 +1,60 @@
 public class Library implements ILibrary {
     private Book[] books;
+    private int quantity;
 
     public Library() {
         books = new Book[10];
+        quantity = 0;
     }
 
     @Override
     public void addBook(Book book) {
-        if (books[books.length - 1] != null) {
+        if (quantity == books.length) {
             Book[] newBooks = new Book[books.length * 2];
-            for (int i = 0; i < books.length; i++) {
+            for (int i = 0; i < quantity; i++) {
                 newBooks[i] = books[i];
             }
-            newBooks[books.length] = book;
+            newBooks[quantity++] = book;
             return;
         }
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] == null) {
-                books[i] = book;
-                return;
-            }
-        }
+        books[quantity++] = book;
     }
 
     @Override
     public boolean deleteBook(int id) {
-        if (findPosition(id) == -1) {
+        int position =  findPosition(id);
+        if (position== -1) {
             System.out.println("Không tồn tại ID: " + id);
             return false;
         }
-        deleteByPosition(findPosition(id));
+        deleteByPosition(position);
         return true;
     }
 
     @Override
     public void updateBook(int id, Book bookUpdata) {
-        if (findPosition(id) == -1) {
+        int position = findPosition(id);
+        if (position == -1) {
             System.out.println("Không tồn tại ID: " + id);
             return;
         }
-        books[findPosition(id)] = bookUpdata;
+        books[position] = bookUpdata;
     }
 
     @Override
     public Book[] searchBookByAuthor(String author) {
-        Book[] result = new Book[books.length];
+        Book[] result = new Book[quantity];
         int index = 0;
-        for (int i = 0; i < books.length; i++) {
+        for (int i = 0; i < quantity; i++) {
             if (books[i] == null) {
                 continue;
             }
             if (books[i].getAuthor().equals(author)) {
                 result[index++] = books[i];
             }
+        }
+        if (index == 0) {
+            return null;
         }
         return result;
     }
@@ -74,7 +76,7 @@ public class Library implements ILibrary {
         if (books == null) {
             return -1;
         }
-        for (int i = 0; i < books.length; i++) {
+        for (int i = 0; i < quantity; i++) {
             if (books[i] != null && books[i].getId() == id) {
                 return i;
             }
@@ -83,8 +85,9 @@ public class Library implements ILibrary {
     }
 
     private void deleteByPosition(int position) {
-        for (int i = position; i < books.length - 1; i++) {
+        for (int i = position; i < quantity - 1; i++) {
             books[i] = books[i + 1];
         }
+        quantity --;
     }
 }

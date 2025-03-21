@@ -78,19 +78,23 @@ public class Main {
                     System.out.print("Enter Author Name: ");
                     String searchAuthor = scanner.nextLine();
                     Book[] books = library.searchBookByAuthor(searchAuthor);
-                    int check= 0;
+                    if (books == null) {
+                        System.out.println("Không tìm thấy ");
+                        break;
+                    }
+                    System.out.println("Danh sách sách có tác giả "+ searchAuthor + "là: ");
                     for (Book book : books){
                         if(book == null) continue;
                         book.displayInfo();
-                        check++;
-                    }
-                    if(check == 0) {
-                        System.out.println("Không tìm thấy");
                     }
                     break;
                 case 5:
                     library.displayAllBooks();
                     break;
+                default:{
+                    System.out.println("Giá trị nhập vào không hợp lệ");
+                    break;
+                }
             }
         } while (choice != 0);
     }
