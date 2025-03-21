@@ -1,15 +1,99 @@
+import java.util.List;
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scanner = new Scanner(System.in);
+        ILibrary library = new Library();
+        int choice;
+        int id;
+        int type;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        do {
+            System.out.println("1. Add Book");
+            System.out.println("2. Update Book");
+            System.out.println("3. Delete Book");
+            System.out.println("4. Search By Author");
+            System.out.println("5. Display All Books");
+            System.out.println("0. Exit");
+            System.out.print("Enter choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter type (1: BusinessBook, 2: ScienceBook): ");
+                    type = scanner.nextInt();
+                    do {
+                        System.out.println("Nhập ID: ");
+                        id = scanner.nextInt();
+                        if (library.findPosition(id) != -1) {
+                            System.out.println("Đã tồn tại ID: " + id);
+                        }
+                    }while (library.findPosition(id) != -1);
+
+                    if (type == 1) {
+                        SachKinhDoanh sachKinhDoanh = new SachKinhDoanh();
+                        sachKinhDoanh.inputInfo(id);
+                        library.addBook(sachKinhDoanh);
+                        break;
+                    }
+                    SachKhoaHoc sachKhoaHoc = new SachKhoaHoc();
+                    sachKhoaHoc.inputInfo(id);
+                    library.addBook(sachKhoaHoc);
+                    break;
+                case 2:
+                    System.out.println("Enter type (1: BusinessBook, 2: ScienceBook): ");
+                    type = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Nhập ID: ");
+                    id =id = scanner.nextInt();
+                    if (library.findPosition(id) == -1) {
+                        System.out.println("Không tìm thấy sách có ID: " + id);
+                        break;
+                    }
+                    if (type == 1) {
+                        SachKinhDoanh sachKinhDoanh = new SachKinhDoanh();
+                        sachKinhDoanh.inputInfo(id);
+                        library.updateBook(id, sachKinhDoanh);
+                        break;
+                    }
+                    SachKhoaHoc sachKhoaHocUpdate = new SachKhoaHoc();
+                    sachKhoaHocUpdate.inputInfo(id);
+                    library.updateBook(id,sachKhoaHocUpdate);
+                    break;
+                case 3:
+                    System.out.print("Enter Book ID to delete: ");
+                    int deleteId = scanner.nextInt();
+                    if(library.deleteBook(deleteId)){
+                        System.out.println("Xóa thành công");
+                        break;
+                    }
+                    System.out.println("Không thể xóa");
+
+                    break;
+                case 4:
+                    System.out.print("Enter Author Name: ");
+                    String searchAuthor = scanner.nextLine();
+                    Book[] books = library.searchBookByAuthor(searchAuthor);
+                    int check= 0;
+                    for (Book book : books){
+                        if(book == null) continue;
+                        book.displayInfo();
+                        check++;
+                    }
+                    if(check == 0) {
+                        System.out.println("Không tìm thấy");
+                    }
+                    break;
+                case 5:
+                    library.displayAllBooks();
+                    break;
+            }
+        } while (choice != 0);
     }
+
+
 }
