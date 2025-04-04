@@ -83,7 +83,7 @@ public class QuanLyImpl implements IQuanLy{
 
     @Override
     public void sapXepTheoTen() {
-
+        danhSachNhanVien.sort(Comparator.comparing(NhanVien::getHoTen));
     }
 
     @Override
