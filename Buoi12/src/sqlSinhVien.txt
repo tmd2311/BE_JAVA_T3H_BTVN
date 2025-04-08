@@ -1,0 +1,101 @@
+# Create database  QL_SinhVien
+use QL_SinhVien;
+
+CREATE TABLE SinhVien (
+                          id INT AUTO_INCREMENT PRIMARY KEY,
+                          ho_ten VARCHAR(100) NOT NULL,
+                          ngay_sinh DATE,
+                          gioi_tinh VARCHAR(10),
+                          dia_chi VARCHAR(255),
+                          email VARCHAR(100) UNIQUE,
+                          diem_trung_binh DECIMAL(4,2)
+);
+
+CREATE TABLE MonHoc (
+                        id_mon INT AUTO_INCREMENT PRIMARY KEY,
+                        ten_mon VARCHAR(100),
+                        so_tin_chi INT
+);
+
+CREATE TABLE DiemThi (
+                         id_diem INT AUTO_INCREMENT PRIMARY KEY,
+                         id_sinhvien INT,
+                         id_mon INT,
+                         diem DECIMAL(4,2),
+                         FOREIGN KEY (id_sinhvien) REFERENCES SinhVien(id),
+                         FOREIGN KEY (id_mon) REFERENCES MonHoc(id_mon)
+);
+
+
+INSERT INTO SinhVien (ho_ten, ngay_sinh, gioi_tinh, dia_chi, email, diem_trung_binh) VALUES
+    ('Ta Manh Dung', '2004-11-23', 'Nam', 'Hà Nội', 'dung@gmail.com', 8.5),
+    ('Tran Thi B', '2001-03-22', 'Nữ', 'Hồ Chí Minh', 'tranthib@yahoo.com', 7.2),
+    ('Le Van C', '1999-07-10', 'Nam', 'Đà Nẵng', 'levanc123@gmail.com', 6.8),
+    ('Pham Thi D', '2002-05-05', 'Nữ', 'Hải Phòng', 'phamthid@gmail.com', 9.1),
+    ('Hoang Van E', '2000-12-12', 'Nam', 'Cần Thơ', 'hoangve@outlook.com', 5.4);
+
+INSERT INTO MonHoc (ten_mon, so_tin_chi) VALUES
+                                             ('Toán cao cấp', 3),
+                                             ('Lập trình C', 4),
+                                             ('Cơ sở dữ liệu', 3);
+
+ select * from SinhVien;
+
+
+INSERT INTO DiemThi(id_sinhvien, id_mon, diem) VALUES
+                                                   (1,1, 10),  (1, 2, 7.5), (1, 3, 8.0),
+                                                   (2, 1, 6.5), (2, 2, 7.2), (2, 3, 7.8),
+                                                   (3, 1, 5.0), (3, 2, 6.3), (3, 3, 6.0),
+                                                   (4, 1, 9.5), (4, 2, 8.8), (4, 3, 9.0),
+                                                   (5, 1, 4.0), (5, 2, 3.5), (5, 3, 5.5);
+
+UPDATE SinhVien SET diem_trung_binh = 10 where id = 1;
+
+UPDATE DiemThi SET diem = 0 where id_sinhvien = 2 and id_mon = 1;
+
+
+
+SELECT * FROM SinhVien;
+
+SELECT sv.ho_ten, mh.ten_mon, dt.diem
+FROM SinhVien sv
+         JOIN DiemThi dt ON sv.id = dt.id_sinhvien
+         JOIN MonHoc mh ON dt.id_mon = mh.id_mon;
+
+
+
+SELECT * FROM SinhVien WHERE diem_trung_binh > 8.0;
+
+
+SELECT DISTINCT mh.ten_mon
+FROM DiemThi dt
+         JOIN MonHoc mh ON dt.id_mon = mh.id_mon
+WHERE dt.diem < 5.0;
+
+
+SELECT COUNT(*) AS 'Số lượng'
+FROM DiemThi WHERE diem > 6.0;
+
+SELECT * FROM SinhVien
+WHERE diem_trung_binh BETWEEN 7.0 AND 8.5 AND gioi_tinh = 'Nam';
+
+
+
+SELECT DISTINCT sv.* FROM SinhVien sv
+                              JOIN DiemThi dt ON sv.id = dt.id_sinhvien
+WHERE sv.diem_trung_binh > 6.5 AND dt.diem < 5.0;
+
+
+
+SELECT mh.ten_mon, COUNT(dt.id_sinhvien) AS 'Số sinh viên'
+FROM DiemThi dt
+         JOIN MonHoc mh ON dt.id_mon = mh.id_mon
+WHERE dt.diem > 6.0
+GROUP BY mh.ten_mon;
+
+
+SELECT mh.ten_mon, COUNT(dt.id_sinhvien) AS 'Số sinh viên'
+FROM DiemThi dt
+         JOIN MonHoc mh ON dt.id_mon = mh.id_mon
+WHERE dt.diem < 5.0
+GROUP BY mh.ten_mon;
