@@ -80,6 +80,10 @@ SELECT * FROM SinhVien
 WHERE diem_trung_binh BETWEEN 7.0 AND 8.5 AND gioi_tinh = 'Nam';
 
 
+SELECT * FROM SinhVien
+WHERE email LIKE '%gmail.com%' OR email LIKE '%yahoo.com%';
+
+
 
 SELECT DISTINCT sv.* FROM SinhVien sv
                               JOIN DiemThi dt ON sv.id = dt.id_sinhvien
