@@ -1,4 +1,4 @@
-package com.example.antino.antino;
+package com.example.antino;
 
 import java.io.*;
 import jakarta.servlet.http.*;

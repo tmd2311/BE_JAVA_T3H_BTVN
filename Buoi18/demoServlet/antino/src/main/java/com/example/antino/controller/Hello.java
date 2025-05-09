@@ -1,6 +1,5 @@
-package com.example.antino.antino.Controller;
+package com.example.antino.controller;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
