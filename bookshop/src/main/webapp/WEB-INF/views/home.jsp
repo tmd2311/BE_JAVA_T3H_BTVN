@@ -142,10 +142,10 @@
           <div class="col-lg-3 col-md-6">
             <div class="card mb-4">
               <div class="card-body">
-                <a href="#" class="stretched-link">
+                <a href="production-detail?id=${p.id}" class="stretched-link">
                   <div class="d-flex align-items-center">
-                    <img style="height: 90px; width: 60px;" src="${p.imagePath}" alt="product image">
-                    <span class="category-title ms-3">${p.name}</span>
+                    <img style="height: 90px; width: 60px;" src="${p.image}" alt="product image">
+                    <span class="category-title ms-3">${p.title}</span>
                   </div>
                 </a>
               </div>

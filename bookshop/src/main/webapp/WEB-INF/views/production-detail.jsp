@@ -123,7 +123,7 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-3 py-3">
-          <a class="text-body" href="./home.html">
+          <a class="text-body" href="${pageContext.request.contextPath}/home">
             <h3>Shop Bán Sách</h3>
           </a>
         </div> <!-- col.// -->
@@ -218,23 +218,24 @@
       <div class="product-detail">
         <!-- Ảnh sách -->
         <div class="product-image">
-          <img src="${product.imagePath}" alt="Ảnh bìa sách">
+          <img src="${product.image}" alt="Ảnh bìa sách">
         </div>
 
         <!-- Thông tin sách -->
         <div class="product-info">
-          <p><strong>Tên sách:</strong> ${product.name}</p>
+          <p><strong>Tên sách:</strong> ${product.title}</p>
           <p><strong>Tác giả:</strong> ${product.author}</p>
           <p><strong>Mô tả:</strong> ${product.description}</p>
-          <p><strong>Thể loại:</strong> ${product.category}</p>
           <p><strong>Nhà xuất bản:</strong> ${product.publisher}</p>
-          <p><strong>Năm xuất bản:</strong> ${product.publishYear}</p>
-          <p><strong>Số trang:</strong> ${product.pages}</p>
+          <p><strong>Năm xuất bản:</strong> ${product.publicationYear}</p>
+          <p><strong>Số trang:</strong> ${product.pageCount}</p>
           <p class="price"><strong>Giá bán:</strong> ${product.price}₫</p>
-          <p><strong>Số lượng còn lại:</strong> ${product.quantity} cuốn</p>
+          <p class="discount"><strong>Giảm giá:</strong> ${product.discountPercent}%</p>
+          <p><strong>Số lượng còn lại:</strong> ${product.stockQuantity} cuốn</p>
           <p><strong>Danh mục:</strong> ${product.category}</p>
           <a href="#" class="buy-button">Mua ngay</a>
         </div>
+
       </div>
     </div>
 
