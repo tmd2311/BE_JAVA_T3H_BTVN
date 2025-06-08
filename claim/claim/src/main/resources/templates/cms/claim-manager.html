@@ -189,6 +189,34 @@
         // Thêm sự kiện lắng nghe nút tìm kiếm
         searchButton.addEventListener('click', filterTable);
     });
+
+    // call api de lay du lieu
+    fetch('http://localhost:8080/api/v1/claim')
+    .then(response => response.json())
+    .then(data => {
+        const tableBody = document.getElementById('claimTableBody');
+        tableBody.innerHTML ='';
+
+        data.forEach(claim => {
+            const  row = document.createElement('tr');
+
+            row.innerHTML=`
+             <td><input type="checkbox"></td>
+             <td>${claim.code}</td>
+
+                    <td>${claim.customerName}</td>
+                    <td>${claim.insuranceProductName}</td>
+                    <td>${new Date(claim.claimDate).toLocaleDateString('vi-VN')}</td>
+                    <td>${claim.description}</td>
+                    <td>${claim.status}</td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    })
+    .catch(err => {
+        console.error('Lỗi khi lấy dữ liệu: ', err);
+    });
 </script>
 
 </body>
