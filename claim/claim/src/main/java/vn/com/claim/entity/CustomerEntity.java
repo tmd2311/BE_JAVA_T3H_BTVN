@@ -9,12 +9,15 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "customer")
 @Data
-public class Customer extends BaseEntity {
+public class CustomerEntity extends BaseEntity {
 
-  private String address;
-  private String bankName;
-  private String bankNumber;
-  private String email;
-  private String name;
-  private String phoneNumber;
+
+    private String address;
+    private String bankName;
+    private String bankNumber;
+    private String email;
+    private String name;
+    private String phoneNumber;
+
+
 }

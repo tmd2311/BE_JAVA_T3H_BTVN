@@ -10,15 +10,17 @@ import lombok.Data;
 @MappedSuperclass
 @Data
 public class BaseEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Long id;
 
-  private LocalDateTime createdDate;
-  private LocalDateTime lastmodifiedDate;
-  private String createdBy;
-  private String lastmodifiedBy;
-  private Boolean deleted;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
+
+    private LocalDateTime createdDate;
+    private LocalDateTime lastModifiedDate;
+    private String createdBy;
+    private String lastModifiedBy;
+    private Boolean deleted;
+
 
 
 }

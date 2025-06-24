@@ -9,8 +9,8 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "claim_status")
 @Data
-public class ClaimStatus extends BaseEntity {
-  private String code;
-  private String description;
+public class ClaimStatusEntity extends BaseEntity{
 
+    private String code;
+    private String description;
 }

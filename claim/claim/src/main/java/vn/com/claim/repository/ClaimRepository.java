@@ -1,22 +1,32 @@
 package vn.com.claim.repository;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import vn.com.claim.dto.ClaimDTO;
-import vn.com.claim.entity.Claim;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import vn.com.claim.entity.ClaimEntity;
 
-public interface ClaimRepository extends JpaRepository<Claim, Long> {
+import java.time.LocalDate;
 
-  @Query("""
-        SELECT new vn.com.claim.dto.ClaimDTO(
-            c.code, cu.name, p.name, c.claimDate, c.description, s.description
-        )
-        FROM Claim c
-        JOIN c.customer cu
-        JOIN c.insuranceProduct p
-        JOIN c.status s
-    """)
-  List<ClaimDTO> findAllClaimsDTOs();
+@Repository
+public interface ClaimRepository extends JpaRepository<ClaimEntity,Long> {
 
+
+  @Query(value = "select c from ClaimEntity c " +
+      "left join c.claimStatusEntity s where " +
+      "(:claimCode is null or c.code = :claimCode) and " +
+      "(:fromDateClaim is null or c.claimDate >= :fromDateClaim) and " +
+      "(:toDateClaim is null or c.claimDate <= :toDateClaim) and " +
+      "(:codeStatus is null or s.code = :codeStatus)")
+  Page<ClaimEntity> findByCondition(@Param("claimCode") String claimCode,
+      LocalDate fromDateClaim,
+      LocalDate toDateClaim,
+      String codeStatus,
+      Pageable pageable);
+
+
+  @Query(value = "select count(e.id) from ClaimEntity e")
+  Long countAll();
 }

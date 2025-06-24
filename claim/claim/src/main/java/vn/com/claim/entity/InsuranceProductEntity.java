@@ -9,9 +9,13 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "insurance_product")
 @Data
-public class InsuranceProduct extends BaseEntity {
-  private String converage;
-  private String name;
-  private String description;
+public class InsuranceProductEntity extends BaseEntity {
+
+    private String coverage;
+
+    private String description;
+
+    private String name;
+
 
 }
