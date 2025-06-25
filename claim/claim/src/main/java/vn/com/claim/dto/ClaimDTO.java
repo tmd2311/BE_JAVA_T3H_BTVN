@@ -1,20 +1,18 @@
 package vn.com.claim.dto;
 
-import java.util.Date;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ClaimDTO {
+
   private String code;
   private String customerName;
-  private String insuranceProductName;
-  private Date claimDate;
-  private String description;
-  private String status;
-
+  private String nameProduct;
+  private LocalDate claimDate;
+  private String coverageProduct;
+  private String statusName;
+  private String statusCode;
 
 }

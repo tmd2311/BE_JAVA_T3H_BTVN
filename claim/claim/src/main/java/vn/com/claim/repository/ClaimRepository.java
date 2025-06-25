@@ -2,6 +2,7 @@ package vn.com.claim.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +30,6 @@ public interface ClaimRepository extends JpaRepository<ClaimEntity,Long> {
 
   @Query(value = "select count(e.id) from ClaimEntity e")
   Long countAll();
+
+  Page<ClaimEntity> findAll(Specification<ClaimEntity> spec, Pageable pageable);
 }

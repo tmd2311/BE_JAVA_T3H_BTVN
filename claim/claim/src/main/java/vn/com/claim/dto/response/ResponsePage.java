@@ -10,4 +10,5 @@ public class ResponsePage<T> extends Response<T> {
   private int pageSize;
   private int pageIndex;
 
+
 }
