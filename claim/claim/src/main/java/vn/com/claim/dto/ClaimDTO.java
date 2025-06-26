@@ -11,7 +11,7 @@ public class ClaimDTO {
   private String customerName;
   private String nameProduct;
   private LocalDate claimDate;
-  private String coverageProduct;
+  private String descriptionProduct;
   private String statusName;
   private String statusCode;
 
