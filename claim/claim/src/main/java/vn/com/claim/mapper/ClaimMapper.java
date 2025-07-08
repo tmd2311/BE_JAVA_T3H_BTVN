@@ -9,11 +9,11 @@ import vn.com.claim.entity.ClaimEntity;
 @Mapper(componentModel = "spring")
 public interface ClaimMapper {
 
-    @Mapping(source = "customerEntity.name",target = "customerName")
-    @Mapping(source = "insuranceProductEntity.name",target = "nameProduct")
-    @Mapping(source = "insuranceProductEntity.description", target = "descriptionProduct")
-    @Mapping(source = "claimStatusEntity.description",target = "statusName")
-    @Mapping(source = "claimStatusEntity.code",target = "statusCode")
+//    @Mapping(source = "customerEntity.name",target = "customerName")
+//    @Mapping(source = "insuranceProductEntity.name",target = "nameProduct")
+//    @Mapping(source = "insuranceProductEntity.coverage",target = "coverageProduct")
+//    @Mapping(source = "claimStatusEntity.description",target = "statusName")
+//    @Mapping(source = "claimStatusEntity.code",target = "statusCode")
     ClaimDTO toDto(ClaimEntity claimEntity);
 
     List<ClaimDTO> toDtos(List<ClaimEntity> claimEntityList);

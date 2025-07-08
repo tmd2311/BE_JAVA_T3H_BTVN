@@ -11,4 +11,5 @@ import vn.com.claim.dto.response.ResponsePage;
 public interface ClaimService {
   ResponsePage<List<ClaimDTO>> getClaims(String claimCode, LocalDate fromDateClaim, LocalDate toDateClaim, String codeStatus, Pageable pageable);
 
+  Response<String> createClaim(ClaimRequest claimRequest);
 }

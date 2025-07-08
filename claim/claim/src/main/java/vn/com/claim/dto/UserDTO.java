@@ -3,8 +3,12 @@ package vn.com.claim.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Getter
+@Setter
 public class UserDTO {
 
   private Long id;

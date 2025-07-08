@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vn.com.claim.dto.ClaimDTO;
 import vn.com.claim.dto.request.ClaimRequest;
+import vn.com.claim.dto.response.Response;
 import vn.com.claim.dto.response.ResponsePage;
 import vn.com.claim.service.ClaimService;
 
@@ -35,8 +36,9 @@ public class ClaimResource {
     return ResponseEntity.ok(responsePage);
   }
 
-  @PostMapping
+  @PostMapping("/create")
   public ResponseEntity<?> createdClaim(@RequestBody ClaimRequest claimRequest){
-    return null;
+    Response<String> response = claimService.createClaim(claimRequest);
+    return ResponseEntity.ok(response);
   }
 }

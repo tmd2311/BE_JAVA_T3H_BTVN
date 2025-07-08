@@ -6,14 +6,19 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "users")
 @Data
+@Getter
+@Setter
 public class UserEntity extends BaseEntity {
 
     private String username;
@@ -32,4 +37,9 @@ public class UserEntity extends BaseEntity {
                 inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<RoleEntity> roles = new HashSet<RoleEntity>();
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(username);
+    }
 }
